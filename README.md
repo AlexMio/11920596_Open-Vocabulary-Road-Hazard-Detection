@@ -1,11 +1,10 @@
 - **Project Topic**: Open-Vocabulary Object Detection
 - **Project Type**: Bring your own method
-# Summary
-## Description
+# Description
 Standard object detection methods, such as most YOLO methods, use a closed vocabulary, meaning they assume a fixed set of classes to discriminate. On the open road, however, the number of road-hazard classes can be arbitrarily large (think of dropped cargo of any kind), making closed-vocabulary methods highly inefficient because the probability of every arbitrary class would need to be predicted during inference. Also, encompassing every possible hazard there is may be impossible, since in practice there may always be the possibility of very rare unpredictable hazards. To alleviate these problems, the standard method is to apply open-vocabulary object detection, where the set of labels is in general not fixed and only available during inference. A good explanation of what open-vocabulary is can be found [here](https://roboflow.com/blog/open-vocabulary-object-detection).
 
 This project does not aim to achieve SotA performance in object detection for automated driving, but creates a proof of concept for achieving open-vocabulary object detection with very limited resources and significant performance on real autonomous driving data.
-## Approach
+# Approach
 This project will re-implement the [OWLv2](https://arxiv.org/pdf/2306.09683v3)[^1] framework for object detection using [SigLIP2](https://arxiv.org/pdf/2502.14786)[^2] as the vision transformer. SigLIP2 is chosen because it exhibits SotA performance and pre-trained variants smaller than 1B are available on [Huggingface](https://huggingface.co/models?search=google/siglip2).
 
 The detection heads will be randomly initialized and trained on the Visual Genome, LVIS, OpenImages V7, and [nuImages](https://www.nuscenes.org/nuimages) datasets.
@@ -15,7 +14,7 @@ OWLv2 relies heavily on self-training with pseudo-annotations, which is the use 
 Due to limited computational resources and time available, this project will most likely not be able to compete with SotA methods, but it will attempt to achieve some measurable success using only a moderately sized dataset and 8GB of VRAM. Because of this and the large volume of training data required, parameters of SigLIP2 will remain frozen throughout the project, and only the object detection heads will be trained.
 
 Ideally, the model is zero-shot capable, meaning it detects and labels salient objects in the image not seen during fine-tuning. These classes are inferred from the knowledge gained in pre-training. This capability is usually measured by dividing the entire training dataset into labels to zero-shot (rare labels) and labels present during training (frequent labels) and evaluating the model on the dataset with zero-shot labels.
-## Datasets
+# Datasets
 OWL-ViT, which OWLv2 is based on, uses a dataset with ~2.6M samples for fine-tuning alone [^4].  This project leans on the dataset suggested by OWL-ViT, however, because of the mentioned constraints and because not all datasets are easily accessible, this project will scale down the size of the actual dataset to around ~50GB. If the results are unsatisfying, I will increase the size by ~50GB. I will also experiment with decreasing the size.
 Therefore, the datasets that will be sampled from are:
 - [Visual Genome](https://homes.cs.washington.edu/~ranjay/visualgenome/index.html)
@@ -28,7 +27,7 @@ Therefore, the datasets that will be sampled from are:
 All of these datasets will be merged into a single dataset. The label space will be merged according to M. Minderer et al.[^1].
 
 The introduced models will also be fine-tuned to the [nuImages](https://www.nuscenes.org/nuimages) dataset. It contains a total of ~100k images (with a total of ~800k bounding boxes of foreground objects) of challenging scenes captured by self-driving vehicles. This dataset will serve as a benchmark to compare the introduced models. A. Madan et al.[^3] provide some reference benchmarks of other SotA methods (Using the same dataset).
-## Work-Breakdown
+# Work-Breakdown
 - Total work-hours per task:
 	- Dataset collection: 8h
     - Designing and building the network: 16h
