@@ -1,0 +1,25 @@
+[project]
+name = "11920596_Open-Vocabulary-Road-Hazard-Detection"
+version = "0.1.0"
+description = "Open-Vocabulary road hazard detection with small vision transformers"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "opencv-python>=5.0.0.93",
+    "pillow>=13.0.0",
+    "requests>=2.34.2",
+    "scipy>=1.18.1",
+    "torch>=2.15.0",
+    "transformers>=5.22.2",
+]
+
+[tool.uv.sources]
+torch = {index = "pytorch-cu134" }
+
+[[tool.uv.index]]
+name = "simple"
+url = "https://pypi.org/simple"
+
+[[tool.uv.index]]
+name = "pytorch-cu134"
+url = "https://download.pytorch.org/whl/cu134"
