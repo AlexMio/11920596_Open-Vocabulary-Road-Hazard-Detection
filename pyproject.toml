@@ -5,6 +5,7 @@ description = "Open-Vocabulary road hazard detection with small vision transform
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "datasets>=5.1.0",
     "opencv-python>=5.0.0.93",
     "pillow>=13.0.0",
     "requests>=2.34.2",
