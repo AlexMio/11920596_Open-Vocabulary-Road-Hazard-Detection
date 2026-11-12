@@ -4,6 +4,8 @@ from datasets import load_dataset
 from transformers import AutoProcessor
 import sys
 import getopt
+from torch.utils.data import DataLoader
+
 
 if __name__ == "__main__":
     hf_access_token = False
@@ -48,3 +50,6 @@ if __name__ == "__main__":
 
     # Print the keys in a slice of the transformed dataset
     print(f"Keys in a slice: {list(ds_transform[0].keys())}")
+
+    ids = ds_transform.to_iterable_dataset(num_shards=64)
+    dataloader = DataLoader(ids, num_workers=4)
