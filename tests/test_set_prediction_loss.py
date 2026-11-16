@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from ..utils.losses import SetPredictionLoss
+from ovrhdet.utils.losses import SetPredictionLoss
 
 devices = [torch.device("cpu")]
 devices.extend([torch.device(f"cuda:{i}") for i in range(torch.cuda.device_count())])
